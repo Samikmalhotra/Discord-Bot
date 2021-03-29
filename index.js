@@ -8,7 +8,22 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	console.log(message.content);
+
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
+
+    if (command === 'args-info') {
+        if (!args.length) {
+            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+        }
+        else if (args[0] === 'foo') {
+            return message.channel.send('bar');
+        }
+    
+        message.channel.send(`First argument: ${args[0]}`);
+    }
     if (message.content === prefix+'ping') {
         // send back "Pong." to the channel the message was sent in
         message.channel.send('Pong.');
