@@ -11,7 +11,7 @@ client.on('message', message => {
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).trim().split(' ');
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
     if (command === 'args-info') {
@@ -22,8 +22,8 @@ client.on('message', message => {
             return message.channel.send('bar');
         }
     
-        message.channel.send(`First argument: ${args[0]}`);
-    }
+        message.channel.send(`Command name: ${command}\nArguments: ${args}`);
+        }
     if (message.content === prefix+'ping') {
         // send back "Pong." to the channel the message was sent in
         message.channel.send('Pong.');
