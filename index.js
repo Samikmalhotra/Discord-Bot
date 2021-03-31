@@ -6,6 +6,8 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 
+// get events
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 // get commands from commandFolders
 const commandFolders = fs.readdirSync('./commands');
@@ -17,9 +19,9 @@ for (const folder of commandFolders) {
 	}
 }
 
-client.once('ready', () => {
-	console.log('Ready!');
-});
+// client.once('ready', () => {
+// 	console.log('Ready!');
+// });
 
 
 client.on('message', message => {
