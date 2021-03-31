@@ -6,14 +6,15 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 
+
 // get events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
+		client.once(event.name, (...args) => event.execute(...args, client));
 	} else {
-		client.on(event.name, (...args) => event.execute(...args));
+		client.on(event.name, (...args) => event.execute(...args, client));
 	}
 }
 
@@ -27,12 +28,8 @@ for (const folder of commandFolders) {
 	}
 }
 
-// client.once('ready', () => {
-// 	console.log('Ready!');
-// });
-
-
-client.on('message', message => {
+client.on('message', (message) => {
+	
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -93,11 +90,12 @@ client.on('message', message => {
 
 
 	try {
-		command.execute(message, args);
+		command.execute(message, args, client);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 }
 });
 
+// Login 
 client.login(token);
