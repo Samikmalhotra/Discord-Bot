@@ -6,7 +6,6 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 
-const { cooldowns } = client;
 
 // get commands from commandFolders
 const commandFolders = fs.readdirSync('./commands');
@@ -35,6 +34,33 @@ client.on('message', message => {
 
     if (!command) return;
 
+	
+	// Guild only
+	if (command.guildOnly && message.channel.type === 'dm') {
+		return message.reply('I can\'t execute that command inside DMs!');
+	}
+
+	// Permissions
+	if (command.permissions) {
+		   const authorPerms = message.channel.permissionsFor(message.author);
+		   if (!authorPerms || !authorPerms.has(command.permissions)) {
+		       return message.reply('You can not do this!');
+		   }
+		}
+
+	// Args needed
+	if (command.args && !args.length) {
+		let reply = `You didn't provide any arguments, ${message.author}!`;
+
+		if (command.usage) {
+			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+		}
+
+		return message.channel.send(reply);		
+	}
+
+	const { cooldowns } = client;
+
 	// Cooldown
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
@@ -52,18 +78,8 @@ client.on('message', message => {
 		}
 	}
 
-	// timestamps.set(message.author.id, now);
-	// setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
-	// Guild only
-	if (command.guildOnly && message.channel.type === 'dm') {
-		return message.reply('I can\'t execute that command inside DMs!');
-	}
-
-	// Args needed
-	if (command.args && !args.length) {
-	    return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
-	}
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 
 	try {
