@@ -97,5 +97,9 @@ client.on('message', (message) => {
 }
 });
 
+client.on('shardError', error => {
+	console.error('A websocket connection encountered an error:', error);
+});
+
 // Login 
 client.login(token);
