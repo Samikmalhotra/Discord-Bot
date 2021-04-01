@@ -32,13 +32,6 @@ for (const folder of commandFolders) {
 	}
 }
 
-client.on("guildMemberAdd", function(member){
-    console.log(`a user joins a guild: ${member.tag}`);
-});
-client.on("guildMemberRemove", function(member){
-    console.log(`a member leaves a guild, or is kicked: ${member.tag}`);
-});
-
 
 client.on('shardError', error => {
 	console.error('A websocket connection encountered an error:', error);
