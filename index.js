@@ -1,7 +1,10 @@
 const fs = require('fs');
 const Discord = require('discord.js');
+const {Intents} = require('discord.js');
 const Canvas = require('canvas');
 const { prefix, token } = require('./config.json');
+const myIntents = new Intents();
+
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -29,7 +32,12 @@ for (const folder of commandFolders) {
 	}
 }
 
-
+client.on("guildMemberAdd", function(member){
+    console.log(`a user joins a guild: ${member.tag}`);
+});
+client.on("guildMemberRemove", function(member){
+    console.log(`a member leaves a guild, or is kicked: ${member.tag}`);
+});
 
 
 client.on('shardError', error => {

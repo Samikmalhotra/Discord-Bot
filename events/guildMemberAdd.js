@@ -1,26 +1,20 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
+const { prefix } = require('../config.json');
 
 
 module.exports = {
-	name: 'profile',
-	description: 'Shows you the profile',
-	async execute(message, args, client) {
-		const exampleEmbed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle(message.author.username)
-            .setURL(message.author.displayAvatarURL({ format: "png", dynamic: true }))
-            .setAuthor('Sataniel: ')
-            .setDescription(message.guild.region)
-            .setThumbnail(message.author.displayAvatarURL({ format: "png", dynamic: true }))
-            .setTimestamp()
-            .setFooter(message.guild, 'https://i.imgur.com/wSTFkRM.png');
-        message.channel.send(exampleEmbed);
+name:'guildMemberAdd',
+execute(message, client){
+    client.on('guildMemberAdd', async member => {
+        console.log('work')
+        const channel = member.guild.channels.cache.find(ch => ch.name === '🥰-welcome-and-rule sent:');
+        if (!channel) return;
     
         const canvas = Canvas.createCanvas(700, 250);
         const ctx = canvas.getContext('2d');
     
-        const background = await Canvas.loadImage('');
+        const background = await Canvas.loadImage('./wallpaper.jpg');
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     
         ctx.strokeStyle = '#74037b';
@@ -46,7 +40,9 @@ module.exports = {
     
         const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
     
-        message.channel.send(`Welcome to the server, ${member}!`, attachment);
-        
-    },
-};
+        channel.send(`Welcome to the server, ${member}!`, attachment);
+    });
+    
+   
+    }
+}

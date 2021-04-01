@@ -7,8 +7,17 @@ module.exports = {
         if (!message.mentions.users.size) {
             return message.reply('you need to tag a user in order to kick them!');
         }
-            const taggedUser = message.mentions.users.first();
+
+        const taggedUser = message.mentions.users.first();
+        const user = message.guild.member(taggedUser);
     
-        taggedUser.kick();
-	},
-};
+        user.kick().then((user)=>{
+            message.channel.send(":wave: " + user.displayName + " has been successfully banned https://gfycat.com/playfulfittingcaribou :point_right: ");
+        }).catch((e)=>{
+            message.channel.send("Access Denied");        });
+        
+        //     .catch(() => {
+        //         message.channel.send("Access Denied");
+        // })
+    }
+}
