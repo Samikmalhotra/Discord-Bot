@@ -1,12 +1,14 @@
 module.exports = {
 	name: 'addtag',
 	description: 'Ping!',
-	async execute(message, args, client) {
+	async execute(message, args, client, Tags) {
 		const commandArgs = args.join(' ');
 		const splitArgs = commandArgs.split(' ');
 		const tagName = splitArgs.shift();
 		const tagDescription = splitArgs.join(' ');
 		
+		console.log(tagName);
+		console.log(tagDescription);
 
 		try {
 			// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);

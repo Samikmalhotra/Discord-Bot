@@ -6,7 +6,7 @@ const { prefix } = require('../config.json');
 
 module.exports = {
 	name: 'message',
-	execute(message, client) {
+	execute(message, client, Tags) {
 		// console.log(`${message.author.tag} in #${message.channel.name} sent: ${message.content}`);
 		if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -69,7 +69,7 @@ module.exports = {
 
 
 	try {
-		command.execute(message, args, client);
+		command.execute(message, args, client, Tags);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
