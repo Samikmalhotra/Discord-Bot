@@ -5,7 +5,7 @@ module.exports = {
 		const commandArgs = args.join(' ');
 		const tagName = commandArgs;
 
-    // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+        // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
         const tag = await Tags.findOne({ where: { name: tagName } });
         if (tag) {
             // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
