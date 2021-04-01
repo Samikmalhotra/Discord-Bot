@@ -1,15 +1,19 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const {Intents} = require('discord.js');
 const Canvas = require('canvas');
 const { prefix, token } = require('./config.json');
-const myIntents = new Intents();
-
+const Sequelize = require('sequelize');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
-
+const sequelize = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	// SQLite only
+	storage: 'database.sqlite',
+});	
 
 // get events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
