@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'addtag',
-	description: 'Ping!',
+	description: 'adding a tag',
 	async execute(message, args, client, Tags) {
 		const commandArgs = args.join(' ');
 		const splitArgs = commandArgs.split(' ');
