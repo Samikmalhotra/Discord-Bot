@@ -6,5 +6,13 @@
 	{
 		"question": "How many letters are there in the alphabet?",
 		"answers": ["26", "twenty-six", "twenty six", "twentysix"]
-	}
+	},
+    {
+        "question": "What color is the space?",
+		"answers": ["black"]
+    },
+    {
+        "question": "What is the server name?",
+		"answers": ["no boundaries"]
+    }
 ]
