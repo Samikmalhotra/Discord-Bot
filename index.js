@@ -28,6 +28,11 @@ const Tags = sequelize.define('tags', {
 		allowNull: false,
 	},
 });
+client.once('ready', () => {
+	Tags.sync();
+});
+
+
 
 // get events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
