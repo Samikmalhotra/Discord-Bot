@@ -12,6 +12,7 @@ module.exports = {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
+	const commandArgs = args.join(' ');
 
 	// Checking for aliases
 	const command = client.commands.get(commandName)
