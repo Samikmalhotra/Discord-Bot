@@ -15,6 +15,7 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 	storage: 'database.sqlite',
 });	
 
+
 const Tags = sequelize.define('tags', {
 	name: {
 		type: Sequelize.STRING,
