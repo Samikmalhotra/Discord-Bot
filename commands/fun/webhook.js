@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 
 
 module.exports = {
-	name: 'ping',
-	description: 'Ping!',
+	name: 'webhook',
+	description: 'webhook!',
 	async execute(message, args, client) {
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Some Title')
