@@ -4,11 +4,10 @@ const Canvas = require('canvas');
 const { prefix } = require('../config.json');
 const { Users, CurrencyShop } = require('../dbObjects');
 const { Op } = require('sequelize');
-const currency = new Discord.Collection();
 
 module.exports = {
 	name: 'message',
-	execute(message, client, Tags) {
+	execute(message, client, Tags, currency) {
 		if (message.author.bot) return;
 		currency.add(message.author.id, 1);
 		if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -35,7 +34,7 @@ module.exports = {
 			if (!authorPerms || !authorPerms.has(command.permissions)) {
 				return message.reply('You can not do this!');
 			}
-			}
+		}
 
 		// Args needed
 		if (command.args && !args.length) {

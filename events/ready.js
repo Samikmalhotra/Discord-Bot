@@ -1,4 +1,4 @@
-const { Users, CurrencyShop } = require('./dbObjects');
+const { Users, CurrencyShop } = require('../dbObjects');
 
 module.exports = {
 	name: 'ready',
