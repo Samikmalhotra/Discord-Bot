@@ -71,7 +71,7 @@ module.exports = {
 
 
 		try {
-			command.execute(message, args, client, Tags);
+			command.execute(message, args, client, Tags, currency);
 		} catch (error) {
 			console.error(error);
 			message.reply('there was an error trying to execute that command!');
