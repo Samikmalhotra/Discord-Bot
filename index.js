@@ -73,17 +73,17 @@ client.on('message', async message => {
 	const [, command, commandArgs] = input.match(/(\w+)\s*([\s\S]*)/);
 
 	if (command === 'buy') {
-		const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
-		if (!item) return message.channel.send('That item doesn\'t exist.');
-		if (item.cost > currency.getBalance(message.author.id)) {
-			return message.channel.send(`You don't have enough currency, ${message.author}`);
-		}
+		// const item = await CurrencyShop.findOne({ where: { name: { [Op.like]: commandArgs } } });
+		// if (!item) return message.channel.send('That item doesn\'t exist.');
+		// if (item.cost > currency.getBalance(message.author.id)) {
+		// 	return message.channel.send(`You don't have enough currency, ${message.author}`);
+		// }
 
-		const user = await Users.findOne({ where: { user_id: message.author.id } });
-		currency.add(message.author.id, -item.cost);
-		await user.addItem(item);
+		// const user = await Users.findOne({ where: { user_id: message.author.id } });
+		// currency.add(message.author.id, -item.cost);
+		// await user.addItem(item);
 
-		message.channel.send(`You've bought a ${item.name}`);
+		//  message.channel.send(`You've bought a ${item.name}`);
 	} else if (command === 'shop') {
 		const items = await CurrencyShop.findAll();
 		return message.channel.send(items.map(i => `${i.name}: ${i.cost}💰`).join('\n'), { code: true });
