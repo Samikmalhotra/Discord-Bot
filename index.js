@@ -63,26 +63,7 @@ client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async message => {
-	if (message.author.bot) return;
-	// currency.add(message.author.id, 1);
 
-	if (!message.content.startsWith(prefix)) return;
-	const input = message.content.slice(prefix.length).trim();
-	if (!input.length) return;
-	const [, command, commandArgs] = input.match(/(\w+)\s*([\s\S]*)/);
-
-	if (command === 'leaderboard') {
-		// return message.channel.send(
-		// 	currency.sort((a, b) => b.balance - a.balance)
-		// 		.filter(user => client.users.cache.has(user.user_id))
-		// 		.first(10)
-		// 		.map((user, position) => `(${position + 1}) ${(client.users.cache.get(user.user_id).tag)}: ${user.balance}💰`)
-		// 		.join('\n'),
-		// 	{ code: true },
-		// );
-	}
-});
 
 
 
