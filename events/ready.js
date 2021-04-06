@@ -3,7 +3,7 @@ const { Users, CurrencyShop } = require('../dbObjects');
 module.exports = {
 	name: 'ready',
 	once: true,
-	async execute(client, currency) {
+	async execute(client, Tags, currency) {
 		console.log('Ready! Logged in as '+client.user.tag);
         client.user.setAvatar('./img/avatar.jpeg');
         client.user.setStatus('online');

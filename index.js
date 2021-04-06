@@ -57,16 +57,6 @@ Reflect.defineProperty(currency, 'getBalance', {
 	},
 });
 
-client.once('ready', async () => {
-	const storedBalances = await Users.findAll();
-	storedBalances.forEach(b => currency.set(b.user_id, b));
-	console.log(`Logged in as ${client.user.tag}!`);
-});
-
-
-
-
-
 
 // get events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
