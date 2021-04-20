@@ -8,6 +8,7 @@ const { Op } = require('sequelize');
 module.exports = {
 	name: 'message',
 	execute(message, client, Tags, currency) {
+		console.log(message.guild.channels.cache)
 		if (message.author.bot) return;
 		currency.add(message.author.id, 1);
 		if (!message.content.startsWith(prefix) || message.author.bot) return;
